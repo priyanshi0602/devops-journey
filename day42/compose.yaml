@@ -1,0 +1,8 @@
+services:
+  web:
+    image: nginx
+    container_name: day42-nginx
+    ports:
+      - "8088:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
