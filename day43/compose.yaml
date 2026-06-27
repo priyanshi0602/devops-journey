@@ -1,0 +1,21 @@
+services:
+  web:
+    image: nginx
+    container_name: day43-nginx
+    ports:
+      - "8089:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+
+  postgres:
+    image: postgres:15
+    container_name: day43-postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: day43db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
