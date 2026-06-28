@@ -1,0 +1,41 @@
+services:
+
+  web:
+    image: nginx
+    container_name: day44-nginx
+
+    ports:
+      - "8090:80"
+
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+
+    depends_on:
+      - postgres
+
+    restart: always
+
+    networks:
+      - day44-network
+
+  postgres:
+    image: postgres:15
+
+    container_name: day44-postgres
+
+    env_file:
+      - .env
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    restart: always
+
+    networks:
+      - day44-network
+
+volumes:
+  postgres-data:
+
+networks:
+  day44-network:
