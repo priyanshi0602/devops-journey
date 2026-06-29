@@ -1,0 +1,42 @@
+services:
+
+  backend:
+    build: ./backend
+
+    container_name: day45-backend
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+
+    restart: always
+
+    networks:
+      - day45-network
+
+  postgres:
+    image: postgres:15
+
+    container_name: day45-postgres
+
+    env_file:
+      - .env
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    restart: always
+
+    networks:
+      - day45-network
+
+volumes:
+  postgres-data:
+
+networks:
+  day45-network:
