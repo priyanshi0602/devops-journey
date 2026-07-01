@@ -1,12 +1,25 @@
 services:
 
+  nginx:
+    build: ./nginx
+
+    container_name: nginx-server
+
+    ports:
+      - "8080:80"
+
+    depends_on:
+      - backend
+
+    restart: always
+
+    networks:
+      - project-network
+
   backend:
     build: ./backend
 
     container_name: flask-backend
-
-    ports:
-      - "5000:5000"
 
     env_file:
       - .env
